@@ -1,10 +1,10 @@
 package com.example.domain.manga;
 
-import java.time.Instant;
-import java.util.UUID;
+import com.example.domain.AggregateRoot;
 
-public class Manga {
-  public String id;
+import java.time.Instant;
+
+public class Manga extends AggregateRoot<MangaID> {
   private String name;
   private String description;
   private boolean isActive;
@@ -16,7 +16,7 @@ public class Manga {
 
   @SuppressWarnings("java:S107")
   private Manga(
-      final String id,
+      final MangaID id,
       final String name,
       final String description,
       final boolean isAvailable,
@@ -26,7 +26,7 @@ public class Manga {
       final Instant updatedAt,
       final Instant deletedAt
   ) {
-    this.id = id;
+    super(id);
     this.name = name;
     this.description = description;
     this.isAvailable = isAvailable;
@@ -38,12 +38,8 @@ public class Manga {
   }
 
   public static Manga newManga(final String name, final String description, final boolean isAvailable, final boolean isCompleted, final boolean isActive) {
-    final var id = UUID.randomUUID().toString();
+    final var id = MangaID.unique();
     return new Manga(id, name, description, isAvailable, isCompleted, isActive, Instant.now(), Instant.now(), null);
-  }
-
-  public String getId() {
-    return id;
   }
 
   public String getName() {
