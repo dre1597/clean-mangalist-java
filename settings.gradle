@@ -1,0 +1,5 @@
+rootProject.name = 'clean-mangalist-java'
+include 'domain'
+include 'application'
+include 'infrastructure'
+
