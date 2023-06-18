@@ -1,6 +1,7 @@
 package com.example.domain.manga;
 
 import com.example.domain.shared.AggregateRoot;
+import com.example.domain.shared.validation.ValidationHandler;
 
 import java.time.Instant;
 
@@ -39,7 +40,14 @@ public class Manga extends AggregateRoot<MangaID> {
 
   public static Manga newManga(final String name, final String description, final boolean isAvailable, final boolean isCompleted, final boolean isActive) {
     final var id = MangaID.unique();
-    return new Manga(id, name, description, isAvailable, isCompleted, isActive, Instant.now(), Instant.now(), null);
+    final var now = Instant.now();
+    final var deletedAt = isActive ? null : now;
+    return new Manga(id, name, description, isAvailable, isCompleted, isActive, now, now, deletedAt);
+  }
+
+  @Override
+  public void validate(ValidationHandler handler) {
+    new MangaValidator(this, handler).validate();
   }
 
   public String getName() {

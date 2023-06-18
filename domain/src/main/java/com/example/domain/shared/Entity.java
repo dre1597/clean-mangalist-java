@@ -1,5 +1,7 @@
 package com.example.domain.shared;
 
+import com.example.domain.shared.validation.ValidationHandler;
+
 import java.util.Objects;
 
 @SuppressWarnings("java:S119")
@@ -10,6 +12,8 @@ public abstract class Entity<ID extends Identifier> {
     Objects.requireNonNull(id, "'id' must not be null");
     this.id = id;
   }
+
+  public abstract void validate(ValidationHandler handler);
 
   public ID getId() {
     return id;
