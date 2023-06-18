@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.domain.shared;
 
 public abstract class AggregateRoot<ID extends Identifier> extends Entity<ID> {
   protected AggregateRoot(ID id) {

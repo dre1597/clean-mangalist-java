@@ -1,6 +1,6 @@
 package com.example.domain.manga;
 
-import com.example.domain.AggregateRoot;
+import com.example.domain.shared.AggregateRoot;
 
 import java.time.Instant;
 

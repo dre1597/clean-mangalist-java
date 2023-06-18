@@ -1,6 +1,6 @@
 package com.example.domain.manga;
 
-import com.example.domain.Identifier;
+import com.example.domain.shared.Identifier;
 
 import java.util.Objects;
 import java.util.UUID;
