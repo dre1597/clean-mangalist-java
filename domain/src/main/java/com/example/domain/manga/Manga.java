@@ -8,9 +8,9 @@ import java.time.Instant;
 public class Manga extends AggregateRoot<MangaID> {
   private String name;
   private String description;
-  private boolean isActive;
-  private boolean isCompleted;
-  private boolean isAvailable;
+  private boolean active;
+  private boolean completed;
+  private boolean available;
   private Instant createdAt;
   private Instant updatedAt;
   private Instant deletedAt;
@@ -20,9 +20,9 @@ public class Manga extends AggregateRoot<MangaID> {
       final MangaID id,
       final String name,
       final String description,
-      final boolean isAvailable,
-      final boolean isCompleted,
-      final boolean isActive,
+      final boolean available,
+      final boolean completed,
+      final boolean active,
       final Instant createdAt,
       final Instant updatedAt,
       final Instant deletedAt
@@ -30,9 +30,9 @@ public class Manga extends AggregateRoot<MangaID> {
     super(id);
     this.name = name;
     this.description = description;
-    this.isAvailable = isAvailable;
-    this.isCompleted = isCompleted;
-    this.isActive = isActive;
+    this.available = available;
+    this.completed = completed;
+    this.active = active;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.deletedAt = deletedAt;
@@ -59,15 +59,15 @@ public class Manga extends AggregateRoot<MangaID> {
   }
 
   public boolean isActive() {
-    return isActive;
+    return active;
   }
 
   public boolean isCompleted() {
-    return isCompleted;
+    return completed;
   }
 
   public boolean isAvailable() {
-    return isAvailable;
+    return available;
   }
 
   public Instant getCreatedAt() {
