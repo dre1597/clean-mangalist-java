@@ -10,8 +10,8 @@ class MangaTest {
   void givenAValidParams_whenCallNewManga_thenInstantiateAManga() {
     final var expectedName = "any_name";
     final var expectedDescription = "any_name";
-    final var expectedIsCompleted = false;
     final var expectedIsAvailable = true;
+    final var expectedIsCompleted = false;
     final var expectedIsActive = true;
 
     final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, expectedIsActive);
@@ -33,8 +33,8 @@ class MangaTest {
   void givenAnInvalidNullName_whenCallNewMangaAndValidate_thenThrowException() {
     final String expectedName = null;
     final var expectedDescription = "any_name";
-    final var expectedIsCompleted = false;
     final var expectedIsAvailable = true;
+    final var expectedIsCompleted = false;
     final var expectedIsActive = true;
     final var expectedErrorMessage = "'name' should not be null";
     final var expectedErrorCount = 1;
@@ -55,8 +55,8 @@ class MangaTest {
   void givenAnInvalidEmptyName_whenCallNewMangaAndValidate_thenThrowException() {
     final String expectedName = " ";
     final var expectedDescription = "any_name";
-    final var expectedIsCompleted = false;
     final var expectedIsAvailable = true;
+    final var expectedIsCompleted = false;
     final var expectedIsActive = true;
     final var expectedErrorMessage = "'name' should not be empty";
     final var expectedErrorCount = 1;
@@ -83,8 +83,8 @@ class MangaTest {
           Mauris velit elit, laoreet ac eros ut, egestas mollis turpis. In vel nibh nulla. Sed varius vulputate placerat. Fusce mattis varius sagittis. Mauris commodo libero vitae aliquam semper. Phasellus efficitur metus arcu, at iaculis dolor hendrerit vitae. Etiam malesuada scelerisque lacus, id tincidunt est facilisis id. Aenean lectus turpis, scelerisque at consectetur faucibus, interdum in eros. Integer laoreet, lorem eget.
         """;
     final var expectedDescription = "any_name";
-    final var expectedIsCompleted = false;
     final var expectedIsAvailable = true;
+    final var expectedIsCompleted = false;
     final var expectedIsActive = true;
     final var expectedErrorMessage = "'name' should not be longer than " + MangaValidator.MAX_LENGTH_NAME + " characters";
     final var expectedErrorCount = 1;
@@ -104,8 +104,8 @@ class MangaTest {
   void givenAValidEmptyDescription_whenCallNewCategoryAndValidate_thenShouldReceiveOK() {
     final var expectedName = "any_name";
     final var expectedDescription = "";
-    final var expectedIsCompleted = false;
     final var expectedIsAvailable = true;
+    final var expectedIsCompleted = false;
     final var expectedIsActive = true;
 
     final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, expectedIsActive);
@@ -128,8 +128,8 @@ class MangaTest {
   void givenAValidFalseIsActive_whenCallNewCategoryAndValidate_thenShouldReceiveOK() {
     final var expectedName = "any_name";
     final var expectedDescription = "any_name";
-    final var expectedIsCompleted = false;
     final var expectedIsAvailable = true;
+    final var expectedIsCompleted = false;
     final var expectedIsActive = false;
 
     final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, expectedIsActive);
