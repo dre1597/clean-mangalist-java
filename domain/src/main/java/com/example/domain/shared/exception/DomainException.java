@@ -21,6 +21,6 @@ public class DomainException extends NoStackTraceException {
   }
 
   public List<CustomError> getErrors() {
-    return errors;
+    return this.errors;
   }
 }
