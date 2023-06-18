@@ -2,6 +2,7 @@ package com.example.domain.shared;
 
 import java.util.Objects;
 
+@SuppressWarnings("java:S119")
 public abstract class Entity<ID extends Identifier> {
   protected final ID id;
 
