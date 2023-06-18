@@ -10,7 +10,6 @@ public class Manga extends AggregateRoot<MangaID> {
   private String description;
   private boolean active;
   private boolean completed;
-  private boolean available;
   private Instant createdAt;
   private Instant updatedAt;
   private Instant deletedAt;
@@ -20,7 +19,6 @@ public class Manga extends AggregateRoot<MangaID> {
       final MangaID id,
       final String name,
       final String description,
-      final boolean available,
       final boolean completed,
       final boolean active,
       final Instant createdAt,
@@ -30,7 +28,6 @@ public class Manga extends AggregateRoot<MangaID> {
     super(id);
     this.name = name;
     this.description = description;
-    this.available = available;
     this.completed = completed;
     this.active = active;
     this.createdAt = createdAt;
@@ -38,11 +35,11 @@ public class Manga extends AggregateRoot<MangaID> {
     this.deletedAt = deletedAt;
   }
 
-  public static Manga newManga(final String name, final String description, final boolean isAvailable, final boolean isCompleted, final boolean isActive) {
+  public static Manga newManga(final String name, final String description, final boolean isCompleted, final boolean isActive) {
     final var id = MangaID.unique();
     final var now = Instant.now();
     final var deletedAt = isActive ? null : now;
-    return new Manga(id, name, description, isAvailable, isCompleted, isActive, now, now, deletedAt);
+    return new Manga(id, name, description, isCompleted, isActive, now, now, deletedAt);
   }
 
   @Override
@@ -95,9 +92,6 @@ public class Manga extends AggregateRoot<MangaID> {
     return completed;
   }
 
-  public boolean isAvailable() {
-    return available;
-  }
 
   public Instant getCreatedAt() {
     return createdAt;

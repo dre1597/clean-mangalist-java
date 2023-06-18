@@ -10,18 +10,16 @@ class MangaTest {
   void givenAValidParams_whenCallNewManga_thenInstantiateAManga() {
     final var expectedName = "any_name";
     final var expectedDescription = "any_name";
-    final var expectedIsAvailable = true;
     final var expectedIsCompleted = false;
     final var expectedIsActive = true;
 
-    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, expectedIsActive);
+    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsCompleted, expectedIsActive);
 
     Assertions.assertNotNull(actualManga);
     Assertions.assertNotNull(actualManga.getId());
     Assertions.assertEquals(expectedName, actualManga.getName());
     Assertions.assertEquals(expectedDescription, actualManga.getDescription());
     Assertions.assertEquals(expectedIsCompleted, actualManga.isCompleted());
-    Assertions.assertEquals(expectedIsAvailable, actualManga.isAvailable());
     Assertions.assertEquals(expectedIsActive, actualManga.isActive());
     Assertions.assertNotNull(actualManga.getCreatedAt());
     Assertions.assertNotNull(actualManga.getUpdatedAt());
@@ -33,13 +31,12 @@ class MangaTest {
   void givenAnInvalidNullName_whenCallNewMangaAndValidate_thenThrowException() {
     final String expectedName = null;
     final var expectedDescription = "any_name";
-    final var expectedIsAvailable = true;
     final var expectedIsCompleted = false;
     final var expectedIsActive = true;
     final var expectedErrorMessage = "'name' should not be null";
     final var expectedErrorCount = 1;
 
-    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, expectedIsActive);
+    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsCompleted, expectedIsActive);
 
     final var actualException = Assertions.assertThrows(
         DomainException.class,
@@ -55,13 +52,12 @@ class MangaTest {
   void givenAnInvalidEmptyName_whenCallNewMangaAndValidate_thenThrowException() {
     final String expectedName = " ";
     final var expectedDescription = "any_name";
-    final var expectedIsAvailable = true;
     final var expectedIsCompleted = false;
     final var expectedIsActive = true;
     final var expectedErrorMessage = "'name' should not be empty";
     final var expectedErrorCount = 1;
 
-    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, expectedIsActive);
+    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsCompleted, expectedIsActive);
 
     final var actualException = Assertions.assertThrows(
         DomainException.class,
@@ -83,13 +79,12 @@ class MangaTest {
           Mauris velit elit, laoreet ac eros ut, egestas mollis turpis. In vel nibh nulla. Sed varius vulputate placerat. Fusce mattis varius sagittis. Mauris commodo libero vitae aliquam semper. Phasellus efficitur metus arcu, at iaculis dolor hendrerit vitae. Etiam malesuada scelerisque lacus, id tincidunt est facilisis id. Aenean lectus turpis, scelerisque at consectetur faucibus, interdum in eros. Integer laoreet, lorem eget.
         """;
     final var expectedDescription = "any_name";
-    final var expectedIsAvailable = true;
     final var expectedIsCompleted = false;
     final var expectedIsActive = true;
     final var expectedErrorMessage = "'name' should not be longer than " + MangaValidator.MAX_LENGTH_NAME + " characters";
     final var expectedErrorCount = 1;
 
-    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, expectedIsActive);
+    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsCompleted, expectedIsActive);
 
     final var actualException = Assertions.assertThrows(
         DomainException.class,
@@ -104,11 +99,10 @@ class MangaTest {
   void givenAValidEmptyDescription_whenCallNewCategoryAndValidate_thenShouldReceiveOK() {
     final var expectedName = "any_name";
     final var expectedDescription = "";
-    final var expectedIsAvailable = true;
     final var expectedIsCompleted = false;
     final var expectedIsActive = true;
 
-    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, expectedIsActive);
+    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsCompleted, expectedIsActive);
 
     Assertions.assertDoesNotThrow(() -> actualManga.validate(new ThrowsValidationHandler()));
 
@@ -116,7 +110,6 @@ class MangaTest {
     Assertions.assertNotNull(actualManga.getId());
     Assertions.assertEquals(expectedName, actualManga.getName());
     Assertions.assertEquals(expectedDescription, actualManga.getDescription());
-    Assertions.assertEquals(expectedIsAvailable, actualManga.isAvailable());
     Assertions.assertEquals(expectedIsCompleted, actualManga.isCompleted());
     Assertions.assertEquals(expectedIsActive, actualManga.isActive());
     Assertions.assertNotNull(actualManga.getCreatedAt());
@@ -128,11 +121,10 @@ class MangaTest {
   void givenAValidFalseIsActive_whenCallNewCategoryAndValidate_thenShouldReceiveOK() {
     final var expectedName = "any_name";
     final var expectedDescription = "any_name";
-    final var expectedIsAvailable = true;
     final var expectedIsCompleted = false;
     final var expectedIsActive = false;
 
-    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, expectedIsActive);
+    final var actualManga = Manga.newManga(expectedName, expectedDescription, expectedIsCompleted, expectedIsActive);
 
     Assertions.assertDoesNotThrow(() -> actualManga.validate(new ThrowsValidationHandler()));
 
@@ -140,7 +132,6 @@ class MangaTest {
     Assertions.assertNotNull(actualManga.getId());
     Assertions.assertEquals(expectedName, actualManga.getName());
     Assertions.assertEquals(expectedDescription, actualManga.getDescription());
-    Assertions.assertEquals(expectedIsAvailable, actualManga.isAvailable());
     Assertions.assertEquals(expectedIsCompleted, actualManga.isCompleted());
     Assertions.assertEquals(expectedIsActive, actualManga.isActive());
     Assertions.assertNotNull(actualManga.getCreatedAt());
@@ -152,11 +143,10 @@ class MangaTest {
   void givenAValidCompletedManga_whenCallMarkAsNotCompleted_thenReturnMangaNotCompleted() {
     final var expectedName = "any_name";
     final var expectedDescription = "any_name";
-    final var expectedIsAvailable = true;
     final var expectedIsCompleted = false;
     final var expectedIsActive = true;
 
-    final var manga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, true, expectedIsActive);
+    final var manga = Manga.newManga(expectedName, expectedDescription, true, expectedIsActive);
 
     Assertions.assertDoesNotThrow(() -> manga.validate(new ThrowsValidationHandler()));
 
@@ -173,7 +163,6 @@ class MangaTest {
     Assertions.assertEquals(manga.getId(), actualManga.getId());
     Assertions.assertEquals(expectedName, actualManga.getName());
     Assertions.assertEquals(expectedDescription, actualManga.getDescription());
-    Assertions.assertEquals(expectedIsAvailable, actualManga.isAvailable());
     Assertions.assertEquals(expectedIsCompleted, actualManga.isCompleted());
     Assertions.assertEquals(expectedIsActive, actualManga.isActive());
     Assertions.assertEquals(createdAt, actualManga.getCreatedAt());
@@ -185,11 +174,10 @@ class MangaTest {
   void givenAValidNotCompletedManga_whenCallMarkAsCompleted_thenReturnMangaCompleted() {
     final var expectedName = "any_name";
     final var expectedDescription = "any_name";
-    final var expectedIsAvailable = true;
     final var expectedIsCompleted = true;
     final var expectedIsActive = true;
 
-    final var manga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, false, expectedIsActive);
+    final var manga = Manga.newManga(expectedName, expectedDescription, false, expectedIsActive);
 
     Assertions.assertDoesNotThrow(() -> manga.validate(new ThrowsValidationHandler()));
 
@@ -206,7 +194,6 @@ class MangaTest {
     Assertions.assertEquals(manga.getId(), actualManga.getId());
     Assertions.assertEquals(expectedName, actualManga.getName());
     Assertions.assertEquals(expectedDescription, actualManga.getDescription());
-    Assertions.assertEquals(expectedIsAvailable, actualManga.isAvailable());
     Assertions.assertEquals(expectedIsCompleted, actualManga.isCompleted());
     Assertions.assertEquals(expectedIsActive, actualManga.isActive());
     Assertions.assertEquals(createdAt, actualManga.getCreatedAt());
@@ -218,11 +205,10 @@ class MangaTest {
   void givenAValidActiveManga_whenCallDeactivate_thenReturnMangaInactivated() {
     final var expectedName = "any_name";
     final var expectedDescription = "any_name";
-    final var expectedIsAvailable = true;
     final var expectedIsCompleted = false;
     final var expectedIsActive = false;
 
-    final var manga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, true);
+    final var manga = Manga.newManga(expectedName, expectedDescription, expectedIsCompleted, true);
 
     Assertions.assertDoesNotThrow(() -> manga.validate(new ThrowsValidationHandler()));
 
@@ -239,7 +225,6 @@ class MangaTest {
     Assertions.assertEquals(manga.getId(), actualManga.getId());
     Assertions.assertEquals(expectedName, actualManga.getName());
     Assertions.assertEquals(expectedDescription, actualManga.getDescription());
-    Assertions.assertEquals(expectedIsAvailable, actualManga.isAvailable());
     Assertions.assertEquals(expectedIsCompleted, actualManga.isCompleted());
     Assertions.assertEquals(expectedIsActive, actualManga.isActive());
     Assertions.assertEquals(createdAt, actualManga.getCreatedAt());
@@ -251,11 +236,10 @@ class MangaTest {
   void givenAValidInactiveManga_whenCallActivate_thenReturnMangaActivated() {
     final var expectedName = "any_name";
     final var expectedDescription = "any_description";
-    final var expectedIsAvailable = true;
     final var expectedIsCompleted = false;
     final var expectedIsActive = true;
 
-    final var manga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, false);
+    final var manga = Manga.newManga(expectedName, expectedDescription, expectedIsCompleted, false);
 
     Assertions.assertDoesNotThrow(() -> manga.validate(new ThrowsValidationHandler()));
 
@@ -272,7 +256,6 @@ class MangaTest {
     Assertions.assertEquals(manga.getId(), actualManga.getId());
     Assertions.assertEquals(expectedName, actualManga.getName());
     Assertions.assertEquals(expectedDescription, actualManga.getDescription());
-    Assertions.assertEquals(expectedIsAvailable, actualManga.isAvailable());
     Assertions.assertEquals(expectedIsCompleted, actualManga.isCompleted());
     Assertions.assertEquals(expectedIsActive, actualManga.isActive());
     Assertions.assertEquals(createdAt, actualManga.getCreatedAt());
