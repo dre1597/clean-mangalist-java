@@ -50,6 +50,18 @@ public class Manga extends AggregateRoot<MangaID> {
     new MangaValidator(this, handler).validate();
   }
 
+  public Manga markAsNotCompleted() {
+    this.completed = false;
+    this.updatedAt = Instant.now();
+    return this;
+  }
+
+  public Manga markAsCompleted() {
+    this.completed = true;
+    this.updatedAt = Instant.now();
+    return this;
+  }
+
   public Manga deactivate() {
     if (getDeletedAt() == null) {
       this.deletedAt = Instant.now();
