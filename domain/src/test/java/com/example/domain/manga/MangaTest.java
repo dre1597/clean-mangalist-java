@@ -147,4 +147,70 @@ class MangaTest {
     Assertions.assertNotNull(actualManga.getUpdatedAt());
     Assertions.assertNotNull(actualManga.getDeletedAt());
   }
+
+  @Test
+  void givenAValidActiveManga_whenCallDeactivate_thenReturnMangaInactivated() {
+    final var expectedName = "any_name";
+    final var expectedDescription = "any_name";
+    final var expectedIsAvailable = true;
+    final var expectedIsCompleted = false;
+    final var expectedIsActive = false;
+
+    final var manga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, true);
+
+    Assertions.assertDoesNotThrow(() -> manga.validate(new ThrowsValidationHandler()));
+
+    final var createdAt = manga.getCreatedAt();
+    final var updatedAt = manga.getUpdatedAt();
+
+    Assertions.assertTrue(manga.isActive());
+    Assertions.assertNull(manga.getDeletedAt());
+
+    final var actualManga = manga.deactivate();
+
+    Assertions.assertDoesNotThrow(() -> actualManga.validate(new ThrowsValidationHandler()));
+
+    Assertions.assertEquals(manga.getId(), actualManga.getId());
+    Assertions.assertEquals(expectedName, actualManga.getName());
+    Assertions.assertEquals(expectedDescription, actualManga.getDescription());
+    Assertions.assertEquals(expectedIsAvailable, actualManga.isAvailable());
+    Assertions.assertEquals(expectedIsCompleted, actualManga.isCompleted());
+    Assertions.assertEquals(expectedIsActive, actualManga.isActive());
+    Assertions.assertEquals(createdAt, actualManga.getCreatedAt());
+    Assertions.assertTrue(actualManga.getUpdatedAt().isAfter(updatedAt));
+    Assertions.assertNotNull(actualManga.getDeletedAt());
+  }
+
+  @Test
+  void givenAValidInactiveManga_whenCallActivate_thenReturnMangaActivated() {
+    final var expectedName = "any_name";
+    final var expectedDescription = "any_description";
+    final var expectedIsAvailable = true;
+    final var expectedIsCompleted = false;
+    final var expectedIsActive = true;
+
+    final var manga = Manga.newManga(expectedName, expectedDescription, expectedIsAvailable, expectedIsCompleted, false);
+
+    Assertions.assertDoesNotThrow(() -> manga.validate(new ThrowsValidationHandler()));
+
+    final var createdAt = manga.getCreatedAt();
+    final var updatedAt = manga.getUpdatedAt();
+
+    Assertions.assertFalse(manga.isActive());
+    Assertions.assertNotNull(manga.getDeletedAt());
+
+    final var actualManga = manga.activate();
+
+    Assertions.assertDoesNotThrow(() -> actualManga.validate(new ThrowsValidationHandler()));
+
+    Assertions.assertEquals(manga.getId(), actualManga.getId());
+    Assertions.assertEquals(expectedName, actualManga.getName());
+    Assertions.assertEquals(expectedDescription, actualManga.getDescription());
+    Assertions.assertEquals(expectedIsAvailable, actualManga.isAvailable());
+    Assertions.assertEquals(expectedIsCompleted, actualManga.isCompleted());
+    Assertions.assertEquals(expectedIsActive, actualManga.isActive());
+    Assertions.assertEquals(createdAt, actualManga.getCreatedAt());
+    Assertions.assertTrue(actualManga.getUpdatedAt().isAfter(updatedAt));
+    Assertions.assertNull(actualManga.getDeletedAt());
+  }
 }
