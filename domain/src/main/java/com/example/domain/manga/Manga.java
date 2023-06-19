@@ -76,6 +76,26 @@ public class Manga extends AggregateRoot<MangaID> {
     return this;
   }
 
+  public Manga update(final String name, final String description, final boolean completed, final boolean active) {
+    this.name = name;
+    this.description = description;
+
+    if (completed) {
+      markAsCompleted();
+    } else {
+      markAsNotCompleted();
+    }
+
+    if (active) {
+      activate();
+    } else {
+      deactivate();
+    }
+
+    this.updatedAt = Instant.now();
+    return this;
+  }
+
   public String getName() {
     return name;
   }
